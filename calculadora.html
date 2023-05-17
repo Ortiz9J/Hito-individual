@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calculadora</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .calculadora {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: darksalmon;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        .calculadora h2 {
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .calculadora input {
+            grid-column: 1 / -1;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .calculadora button {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+        <div class="calculadora">
+            <h2>Calculadora</h2>
+            <input type="text" id="result" readonly>
+            <button onclick="limpiar()">C</button>
+            <button onclick="numero(7)">7</button>
+            <button onclick="numero(8)">8</button>
+            <button onclick="numero(9)">9</button>
+            <button onclick="operador('+')">+</button>
+            <button onclick="numero(4)">4</button>
+            <button onclick="numero(5)">5</button>
+            <button onclick="numero(6)">6</button>
+            <button onclick="operador('-')">-</button>
+            <button onclick="numero(1)">1</button>
+            <button onclick="numero(2)">2</button>
+            <button onclick="numero(3)">3</button>
+            <button onclick="operador('*')">*</button>
+            <button onclick="numero(0)">0</button>
+            <button onclick="numero('.')">.</button>
+            <button onclick="igual()">=</button>
+            <button onclick="operador('/')">/</button>
+            <button onclick="porcentaje()">%</button>
+            <button onclick="cuadrado()">x²</button>
+            <button onclick="raiz()">√</button>
+        </div>
+
+    <script>
+        let input = document.getElementById('result');
+
+        function numero(number) {
+            input.value += number;
+        }
+
+        function operador(operator) {
+            input.value += operator;
+        }
+
+        function igual() {
+            try {
+                const result = eval(input.value);
+                input.value = result;
+            } catch (error) {
+                input.value = 'Error';
+            }
+        }
+
+        function limpiar() {
+            input.value = '';
+        }
+
+        function porcentaje() {
+            try {
+                const result = eval(input.value) / 100;
+                input.value = result;
+            } catch (error) {
+                input.value = 'Error';
+            }
+        }
+
+        function cuadrado() {
+            try {
+                const result = Math.pow(eval(input.value), 2);
+                input.value = result;
+            } catch (error) {
+                input.value = 'Error';
+            }
+        }
+
+        function raiz() {
+            try {
+                const result = Math.sqrt(eval(input.value));
+                input.value = result;
+            } catch (error) {
+                input.value = 'Error';
+            }
+        }
+    </script>
+</body>
+
+</html>
+

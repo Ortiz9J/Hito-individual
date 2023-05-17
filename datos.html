@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Datos de provincias</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      background-color: #364da0;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>PROVINCIAS</h2>
+  <table id="tabladatos">
+    <thead>
+      <tr>
+        <th>Codigo Provincia</th>
+        <th>Nombre provincia</th>
+        <th>Codigo CCAA</th>
+        <th>Comunidad Autonoma</th>
+        <th>Capital</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Obtener la referencia a la tabla
+      var table = document.getElementById('tabladatos');
+
+      // Cargar los datos desde el enlace al API
+      fetch('https://www.el-tiempo.net/api/json/v1/provincias')
+        .then(response => response.json())
+        .then(data => {
+          // Recorrer los datos y generar las filas de la tabla
+          data.forEach(item => {
+            var row = table.insertRow();
+            row.insertCell().textContent = item.CODPROV;
+            row.insertCell().textContent = item.NOMBRE_PROVINCIA;
+            row.insertCell().textContent = item.CODAUTON;
+            row.insertCell().textContent = item.COMUNIDAD_CIUDAD_AUTONOMA;
+            row.insertCell().textContent = item.CAPITAL_PROVINCIA;
+          });
+        })
+    });
+  </script>
+</body>
+
+</html>
